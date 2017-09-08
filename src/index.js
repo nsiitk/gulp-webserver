@@ -214,7 +214,9 @@ module.exports = function(options) {
   } else {
     webserver = http.createServer(app).listen(config.port, config.host, openInBrowser);
   }
-
+  if(config.timeout){
+    webserver.setTimeout(config.timeout);
+  }
   gutil.log('Webserver started at', gutil.colors.cyan('http' + (config.https ? 's' : '') + '://' + config.host + ':' + config.port));
 
   stream.on('kill', function() {
